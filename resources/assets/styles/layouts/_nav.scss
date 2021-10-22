@@ -1,0 +1,479 @@
+/* stylelint-disable no-descending-specificity */
+$nav-link-color: $primary !default;
+$link-active-color: $secondary !default;
+$sub-background-color: $cream !default;
+
+.header-cart-hold {
+  .nav-hold {
+    font-size: 18px;
+
+    .nav {
+      font-family: $display-font;
+
+      a {
+        font-weight: bold;
+        position: relative;
+
+        @include media-breakpoint-down(lg) {
+          display: inline-block !important;
+          width: auto;
+        }
+
+        &::before {
+          content: "";
+          background-color: #fc85b3;
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 10px;
+          width: 0;
+          height: 10px;
+          z-index: -1;
+          transition: width ease-out 0.2s;
+        }
+      }
+
+      li {
+        & > ul {
+          a {
+            &:hover,
+            &:focus,
+            &:active {
+              color: $red;
+            }
+          }
+        }
+
+        &.make-button {
+          margin-top: 0;
+
+          @include media-breakpoint-up(xl) {
+            padding-left: 10px;
+          }
+
+          & > a {
+            @extend .btn;
+            @extend .btn-primary;
+
+            min-width: 0;
+            padding: 7px 15px 1px 17px;
+            border-color: #fff !important;
+            margin-top: 0 !important;
+
+            &::before {
+              display: none;
+            }
+          }
+        }
+      }
+
+      a:hover:not(.cart-link),
+      li:not(.cart-link-hold):hover > a { // This trick keeps all active nodes in the navigation path colored active
+        &::before {
+          width: 98%;
+        }
+      }
+
+      // First level item arrows
+      .menu-item-has-children {
+        > a {
+          &::after {
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            /* stylelint-disable-next-line */
+            font-family: "Font Awesome 5 Pro";
+            font-weight: 400 !important;
+            content: "\f078";
+            font-size: 10px;
+            margin-left: 5px;
+            //position: absolute;
+            //right: 0;
+            //top: 50%;
+            //transform: translateY(-50%);
+          }
+        }
+      }
+
+      ul .menu-item-has-children {
+        > a {
+          &::after {
+            right: 2px;
+            content: "\f054";
+          }
+        }
+      }
+    }
+
+    .mobile-nav-contact-details {
+      display: none;
+    }
+  }
+
+  .menu-toggle {
+    outline: 0;
+    box-shadow: none;
+    padding-right: 0 !important;
+
+    &:hover,
+    &:focus,
+    &:active {
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .header-cart-hold {
+    .nav-hold {
+      .nav {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        width: 100%;
+        text-align: center;
+
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          position: absolute;
+          left: -999em;
+          background-color: $sub-background-color;
+          border: 2px $primary solid;
+
+          a {
+            color: $primary;
+          }
+        }
+
+        li {
+          display: inline-block;
+          position: relative;
+          text-align: left;
+
+          &:hover,
+          &.focus {
+            > ul {
+              left: auto;
+            }
+          }
+
+          li {
+            display: block;
+
+            &:hover,
+            &.focus {
+              > ul {
+                left: 100%;
+                top: 0;
+              }
+            }
+          }
+        }
+
+        // Global menu link styles
+        a {
+          color: $nav-link-color;
+          text-decoration: none;
+          display: block;
+          white-space: nowrap;
+          padding: 10px 12px;
+
+          @media only screen and (max-width: 1500px) {
+            padding: 10px 8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+$mobile-link-color: $cream !default;
+$mobile-link-active-color: $primary !default;
+$mobile-background-color: $secondary !default;
+
+@include media-breakpoint-down(lg) {
+  .header-cart-hold {
+    .nav-hold {
+      background-color: $mobile-background-color;
+      width: 100%;
+      position: fixed;
+      top: $total-height;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transform: translateY(-120%);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s ease-in-out;
+      -ms-overflow-style: none;
+      overflow: -moz-scrollbars-none;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      z-index: 50;
+      transition-delay: 1s;
+      font-size: 20px;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      @include media-breakpoint-down(md) {
+        top: $total-height-mobile;
+      }
+
+      .mobile-nav-contact-details {
+        display: block;
+        text-align: center;
+        flex: 0 0 auto;
+        transition: 0.2s ease-in-out all;
+        transition-delay: 0s;
+        transform: translateY(120%);
+        margin-top: 75px;
+
+        @include media-breakpoint-down(sm) {
+          margin-top: 50px;
+        }
+
+        .nav-mobile-clip {
+          margin-bottom: -2px;
+          width: 100%;
+          height: 30px;
+        }
+
+        .contact-details {
+          background-color: $cream;
+          padding: 50px 30px 30px 30px;
+
+          &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            width: 100px;
+            height: 50px;
+            border-top-left-radius: 100px;
+            border-top-right-radius: 100px;
+            background-color: $cream;
+            top: -30px;
+            margin-left: -50px;
+
+            @include media-breakpoint-down(sm) {
+              width: 76px;
+              height: 38px;
+              border-top-left-radius: 76px;
+              border-top-right-radius: 76px;
+              top: -18px;
+              margin-left: -38px;
+            }
+          }
+
+          .social-links {
+            a {
+              padding: 7px;
+              color: $primary;
+              text-decoration: none;
+              font-size: 1.4em;
+              transition: all 0.2s ease-in-out;
+
+              &:hover,
+              &:focus,
+              &:active {
+                text-decoration: none;
+                color: $secondary;
+              }
+            }
+          }
+
+          ul {
+            list-style: none;
+            display: block;
+            padding: 0;
+            margin: 0;
+            margin-top: 20px;
+
+            li {
+              display: block;
+              margin-bottom: 5px;
+
+              a {
+                text-decoration: none;
+                padding-left: 30px;
+                display: inline-block;
+                position: relative;
+                color: $primary;
+
+                i {
+                  position: absolute;
+                  left: 0;
+                  top: 2px;
+                  font-weight: 400;
+                }
+              }
+
+              &.address {
+                font-weight: 700;
+                font-size: 0.9em;
+                margin-top: 15px;
+                padding-left: 30px;
+                position: relative;
+                display: inline-block;
+
+                i {
+                  font-size: 1.1em;
+                  font-weight: 400;
+                  position: absolute;
+                  left: 0;
+                  top: 2px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .nav {
+        margin: 0;
+        list-style: none;
+        width: 100%;
+        text-align: center;
+        display: block;
+        padding: 20px 0;
+        flex: 0 0 auto;
+        transition: 0.2s ease-in-out all;
+        transition-delay: 0.5s;
+        opacity: 0;
+
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          height: 0;
+          overflow: hidden;
+          background-color: $sub-background-color;
+
+          li {
+            &:first-of-type {
+              margin-top: 20px;
+            }
+
+            &:last-of-type {
+              margin-bottom: 20px;
+            }
+
+            a {
+              color: $primary;
+              font-size: 0.9em;
+
+              &:hover,
+              &:focus,
+              &:active {
+                color: $red;
+              }
+            }
+          }
+        }
+
+        a {
+          color: $mobile-link-color;
+          text-decoration: none;
+          display: block;
+          white-space: nowrap;
+          padding: 10px 12px;
+          transition-delay: 1s;
+
+          @media only screen and (max-width: 1500px) {
+            padding: 10px 8px;
+          }
+
+          @include media-breakpoint-only(lg) {
+            padding: 10px 6px;
+          }
+        }
+
+        a:hover,
+        li:hover > a,
+        .current-menu-item > a,
+        .current-menu-ancestor > a { // This trick keeps all active nodes in the navigation path colored active
+          font-weight: 700;
+        }
+
+        li {
+          display: block;
+          position: relative;
+          text-align: center;
+          width: 100%;
+
+          &.sub-open {
+            > a {
+              font-weight: 700;
+            }
+
+            > ul {
+              height: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  body.nav-open {
+    overflow: hidden;
+
+    .header-cart-hold {
+      .nav-hold {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+        transition-delay: 0s;
+
+        .mobile-nav-contact-details {
+          transform: translateY(0);
+          transition-delay: 1s;
+        }
+
+        .nav {
+          opacity: 1;
+          transition-delay: 0.4s;
+
+          a {
+            transition-delay: 0s;
+          }
+        }
+      }
+    }
+  }
+
+  body.scroll {
+    @include media-breakpoint-up(lg) {
+      .header-cart-hold {
+        .nav-hold {
+          top: $total-height-mobile;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  body.transparent-header {
+    &:not(.scroll):not(.nav-open) {
+      .header-cart-hold {
+        .nav-hold {
+          .nav {
+            a {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+}

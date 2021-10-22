@@ -1,0 +1,33 @@
+body {
+  .left-right-text-block {
+    .container {
+      .row {
+        .col-12 {
+          .inner-text {
+            height: 100%;
+          }
+
+          @include media-breakpoint-down(sm) {
+            margin-bottom: 30px;
+          }
+
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    &.white-row {
+      .container {
+        .row {
+          .col-12 {
+            .inner-text {
+              border-color: $cream;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+/** Import Bootstrap functions */
+@import "~bootstrap/scss/functions";
+
+$primary: #324c5e;
+$secondary: #c0507f;
+
+$theme-colors: (
+  primary: $primary,
+  secondary: $secondary
+);
+
+$light-grey: #e9f2f8;
+$cream: #fff;
+$red: $secondary;
+$text-color: $primary;
+$heading-color: $primary;
+
+/** Bootstrap navbar fix (https://git.io/fADqW) */
+$navbar-dark-toggler-icon-bg: none;
+$navbar-light-toggler-icon-bg: none;
+
+//fonts 
+$body-font: "Transat", sans-serif;
+$display-font: "Transat", sans-serif;
+
+//HEADER VARIABLES
+$pre-header-height: 0;
+$pre-header-height-scroll: 0;
+$pre-header-height-mobile: 0;
+$pre-header-background: $primary;
+$pre-header-text-color: #fff;
+
+//hide pre-header-on-scroll
+$hide-pre-header: false;
+
+$header-height: 162px;
+$header-height-scroll: 70px;
+$header-height-mobile: $header-height-scroll;
+$header-padding: 20px;
+$header-padding-mobile: 10px;
+$header-background: #fff;
+$header-background-scroll: #fff;
+$header-background-nav-open: $secondary;
+
+$total-height: $header-height + $pre-header-height;
+$total-height-mobile: $header-height-mobile + $pre-header-height-mobile;
+
+//slick slider
+$slick-loader-path: "~slick-carousel/slick/";
+$slick-font-path: "#{$slick-loader-path}fonts/";
+
+$slider-nav-height: 42px;
+
+$enable-rounded: false;
+
+//hamburger
+$hamburger-padding-x: 10px;
+$hamburger-padding-y: 10px;
+$hamburger-layer-width: 35px;
+$hamburger-layer-height: 4px;
+$hamburger-layer-spacing: 5px;
+$hamburger-layer-color: $secondary;
+$hamburger-layer-border-radius: 4px;
+$hamburger-hover-opacity: 1;
+
+$container-max-widths: (
+  xl: 1640px
+);
+
+$global-padding: 90px;
+$global-padding-mobile: 50px;
+
+$tooltip-arrow-color: #000;
+$tooltip-bg: #000;
+$tooltip-opacity: 1;
+$tooltip-max-width: 300px;
+$tooltip-padding-y: 10px;
+$tooltip-padding-x: 10px;

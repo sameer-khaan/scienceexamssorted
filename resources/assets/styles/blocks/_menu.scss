@@ -1,0 +1,62 @@
+.menu-section-hold {
+  padding: 30px;
+  border: 3px solid $primary;
+  text-align: center;
+  margin-bottom: 30px;
+
+  @include media-breakpoint-down(md) {
+    margin-bottom: 20px;
+  }
+
+  .sep {
+    border-style: wavy;
+    border: 1px $primary;
+    display: inline-block;
+    max-width: 100px;
+    width: 90%;
+    margin-top: 10px;
+    margin-bottom: 30px;
+
+    object {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .title-hold {
+    *:last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  .items-hold {
+    text-align: left;
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 2px dotted $primary;
+      flex-wrap: nowrap;
+
+      .item-description {
+        *:last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+
+      &:last-of-type {
+        margin-bottom: 0 !important;
+        border-bottom: none;
+        padding-bottom: none;
+      }
+
+      .price {
+        align-self: flex-end;
+        flex: 0 0 auto;
+        padding-left: 15px;
+      }
+    }
+  }
+}

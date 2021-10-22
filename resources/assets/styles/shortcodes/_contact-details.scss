@@ -1,0 +1,57 @@
+.contact-details-shortcode {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+    li {
+      padding: 0;
+      margin: 0;
+      padding-left: 30px;
+      position: relative;
+      margin-bottom: 10px;
+      font-family: $display-font;
+
+      i {
+        position: absolute;
+        left: 0;
+        top: 4px;
+        width: 18px;
+        text-align: center;
+      }
+
+      a {
+        text-decoration: none;
+        display: inline-block;
+        transform: scale(1);
+        transition: all 0.2s ease-in-out;
+        transform-origin: 0 50%;
+        font-weight: 700;
+
+        &:hover,
+        &:focus,
+        &:active {
+          transform: scale(1.1);
+        }
+      }
+
+      &:last-of-type {
+        margin-bottom: 0;
+
+        a {
+          @include media-breakpoint-down(md) {
+            word-break: break-all;
+            font-size: 0.9em;
+            letter-spacing: -1px;
+          }
+
+          @include media-breakpoint-down(xs) {
+            font-size: 0.7em;
+            letter-spacing: 0;
+          }
+        }
+      }
+    }
+  }
+}

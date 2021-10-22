@@ -1,0 +1,1 @@
+{{ get_field('add_padding') ? "global-padding" : "" }} {{ get_field('add_additional_padding_top') ? "additional-padding-top" : "" }} {{ get_field('add_additional_padding_bottom') ? "additional-padding-bottom" : "" }} {{ get_field('white_text') ? "white-row" : "" }}

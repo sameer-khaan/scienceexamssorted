@@ -1,0 +1,48 @@
+/* stylelint-disable no-descending-specificity */
+body {
+  .clip-block {
+    overflow: hidden;
+    position: relative;
+    height: 100px;
+
+    @include media-breakpoint-down(md) {
+      height: 50px;
+    }
+
+    .clip-hold {
+      height: 100%;
+      position: absolute;
+      left: -2px;
+      right: -2px;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &.reverse {
+      .clip-hold {
+        svg {
+          transform: scaleY(-1);
+        }
+      }
+    }
+  }
+
+  &:not(.wp-admin) {
+    .clip-block {
+      z-index: 2;
+    }
+  }
+
+  &.wp-admin {
+    .clip-block {
+      svg {
+        path {
+          fill: #000 !important;
+        }
+      }
+    }
+  }
+}

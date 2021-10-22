@@ -1,0 +1,129 @@
+/* stylelint-disable no-descending-specificity */
+body {
+  .text-image-split-block {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: $light-grey;
+
+    .content {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      padding: 100px 50px 100px 100px;
+      justify-content: center;
+      flex: 0 0 auto;
+
+      @include media-breakpoint-down(lg) {
+        padding: 80px 50px;
+      }
+
+      @include media-breakpoint-down(md) {
+        padding: 60px 40px;
+      }
+
+      @include media-breakpoint-down(sm) {
+        width: 100%;
+        padding: 60px 20px 60px 20px;
+      }
+    }
+
+    .image {
+      width: 50%;
+      overflow: hidden;
+      flex: 0 0 auto;
+      position: relative;
+
+      .image-split-clip {
+        position: absolute;
+        top: -2px;
+        bottom: -2px;
+        left: -4px;
+        width: 80px;
+        height: 102%;
+        z-index: 2;
+        transform: scaleX(-1);
+
+        @include media-breakpoint-down(lg) {
+          width: 50px;
+        }
+
+        @include media-breakpoint-down(sm) {
+          display: none;
+        }
+      }
+
+      .image-split-clip-mobile {
+        display: none;
+
+        @include media-breakpoint-down(sm) {
+          position: absolute;
+          bottom: auto;
+          right: -2px;
+          top: -2px;
+          left: -2px;
+          width: 102%;
+          height: 25px;
+          display: block;
+          z-index: 2;
+          transform: scaleY(1);
+        }
+      }
+
+      @include media-breakpoint-down(sm) {
+        width: 100%;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &.image-left {
+      @include media-breakpoint-up(xl) {
+        .content {
+          padding: 100px 100px 100px 70px;
+        }
+      }
+
+      @include media-breakpoint-up(md) {
+        flex-direction: row-reverse;
+
+        .image {
+          .image-split-clip {
+            right: -4px;
+            left: auto;
+            transform: scaleX(1);
+          }
+        }
+      }
+    }
+  }
+
+  &.wp-admin {
+    .text-image-split-block {
+      display: block !important;
+
+      .content {
+        padding: 0 !important;
+      }
+
+      .image {
+        width: 100% !important;
+
+        img {
+          width: 100% !important;
+          height: auto !important;
+        }
+      }
+
+      .image-split-clip,
+      .image-split-clip-mobile {
+        display: none !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,126 @@
+/* stylelint-disable no-descending-specificity */
+a.btn,
+button.btn,
+button:not(.hamburger):not(.gm-control-active),
+button.button,
+.button,
+a.button,
+a.button.alt,
+.button.alt,
+button.button.alt,
+.wc-tabs > li > a {
+  border: 2px solid !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  padding: 10px 30px 5px 30px;
+  background-color: transparent !important;
+  min-width: 150px;
+  margin-top: 25px;
+  text-decoration: none !important;
+  font-family: $display-font;
+  font-size: 1em;
+  position: relative;
+  border-radius: 0 !important;
+  text-transform: uppercase;
+  border-top-left-radius: 20px !important;
+
+  @include media-breakpoint-down(sm) {
+    font-size: 1em;
+    padding: 10px 15px;
+    min-width: auto;
+  }
+
+  &.add_to_cart_button {
+    margin-top: 25px !important;
+  }
+
+  &.loading {
+    &::after {
+      display: none !important;
+    }
+  }
+
+  &.btn-primary,
+  &.btn-secondary,
+  &.btn-default,
+  &.button,
+  &.alt {
+    border-color: transparent !important;
+    color: #fff !important;
+    background-color: $secondary !important;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $primary !important;
+      color: #fff !important;
+    }
+
+    &:disabled[disabled],
+    &:disabled,
+    .disbaled {
+      background-color: $light-grey !important;
+      color: $primary !important;
+    }
+  }
+
+  &.btn-white {
+    color: $primary !important;
+    background-color: #fff !important;
+    border-color: transparent !important;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $primary !important;
+      color: #fff !important;
+    }
+  }
+
+  &.btn-white-hover {
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: #fff !important;
+      color: $primary !important;
+    }
+  }
+
+  &.btn-pink-hover {
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      background-color: $secondary !important;
+      color: #fff !important;
+    }
+  }
+
+  &.btn-text {
+    border: 0 !important;
+    font-size: 20px;
+    margin-top: 0;
+    padding: 0;
+    color: $primary !important;
+    border-radius: 0 !important;
+    min-width: auto;
+
+    i {
+      color: $secondary !important;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $secondary !important;
+    }
+  }
+
+  &.no-top-margin {
+    margin-top: 0;
+  }
+
+  &.btn-full {
+    width: 100%;
+  }
+}

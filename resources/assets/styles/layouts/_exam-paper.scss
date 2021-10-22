@@ -1,0 +1,63 @@
+/* stylelint-disable no-descending-specificity */
+body.single-ses_exam_paper {
+  .button-group {
+    margin-top: -25px;
+
+    .btn {
+      position: relative;
+
+      .new-badge {
+        position: absolute;
+        right: -7px;
+        top: -10px;
+        padding: 0 3px;
+        background-color: $primary;
+        color: #fff;
+        font-size: 0.7em;
+      }
+    }
+  }
+
+  .page-inner-content > :first-child:not(div) {
+    margin-top: 0;
+  }
+
+  .large-card {
+    h3 {
+      margin-top: 40px;
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .other-topics-hold {
+    margin-top: 20px;
+
+    h3 {
+      text-decoration: none;
+      cursor: pointer;
+
+      small {
+        margin-left: 10px;
+        font-weight: 600;
+      }
+    }
+
+    .questions-hold {
+      span {
+        display: inline-block;
+        color: #fff;
+        background-color: $secondary;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        padding: 5px;
+
+        &:last-of-type {
+          margin-bottom: 25px;
+        }
+      }
+    }
+  }
+}

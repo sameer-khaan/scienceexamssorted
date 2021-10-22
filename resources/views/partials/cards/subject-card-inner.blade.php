@@ -1,0 +1,1 @@
+<a href="{{ $link }}" class="work-card post-card subject-card {{$activeClass}} customStyle" data-aos="fade-up" data-aos-offset="50" data-aos-duration="1000">@php $object = get_post_type_object( $post_type ); @endphp {!!$object->label!!} <span> ({{$term->name}})</span></a>

@@ -1,0 +1,16 @@
+.map-widget {
+  .map-holder {
+    height: 100%;
+    min-height: 500px;
+
+    .google-maps-marker {
+      overflow: visible !important;
+      opacity: 1 !important;
+
+      img {
+        width: 100% !important;
+        height: 100% !important;
+      }
+    }
+  }
+}

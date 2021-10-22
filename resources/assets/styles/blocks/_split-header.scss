@@ -1,0 +1,11 @@
+body {
+  .split-header-block {
+    .content-hold {
+      position: relative;
+
+      @include media-breakpoint-down(md) {
+        margin-bottom: 30px;
+      }
+    }
+  }
+}

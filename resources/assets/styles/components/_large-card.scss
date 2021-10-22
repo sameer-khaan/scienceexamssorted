@@ -1,0 +1,18 @@
+.large-card {
+  background-color: #fff;
+  padding: 50px;
+  border-top-left-radius: 50px;
+
+  @include media-breakpoint-down(md) {
+    padding: 30px;
+    border-top-left-radius: 30px;
+  }
+
+  &.month-card {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+}

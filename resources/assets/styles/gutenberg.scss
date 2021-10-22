@@ -1,0 +1,11 @@
+@import "common/variables";
+
+/** Import everything from autoload */
+@import "./autoload/**/*";
+@import "blocks/*";
+
+body.wp-admin {
+  .wp-block {
+    max-width: 1280px;
+  }
+}

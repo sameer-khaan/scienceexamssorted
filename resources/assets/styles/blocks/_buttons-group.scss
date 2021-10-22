@@ -1,0 +1,25 @@
+body:not(.wp-admin) {
+  .buttons-group {
+    .links-hold {
+      justify-content: space-between;
+      align-items: stretch;
+      flex-wrap: wrap;
+      display: flex;
+      margin: -10px;
+
+      a {
+        display: inline-block;
+        flex: 0 1 auto;
+        margin: 10px;
+
+        @include media-breakpoint-down(md) {
+          width: 45%;
+        }
+
+        @include media-breakpoint-down(sm) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

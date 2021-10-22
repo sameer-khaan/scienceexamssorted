@@ -1,0 +1,54 @@
+/* stylelint-disable no-descending-specificity */
+.cookie-gdpr-message {
+  @include media-breakpoint-down(md) {
+    padding: 20px;
+  }
+
+  h2 {
+    @extend .h4;
+
+    margin-bottom: 10px;
+  }
+
+  .cookie-gdpr-message-hold {
+    max-height: none;
+  }
+
+  .cookie-gdpr-accept-hold {
+    margin-top: 10px;
+
+    .cookie-gdpr-btn {
+      @extend .btn;
+      @extend .btn-primary;
+
+      background-color: $text-color !important;
+      font-size: 16px;
+
+      span {
+        padding: 0;
+      }
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+}
+
+.cookie-gdpr-settings {
+  .cookie-gdpr-btn {
+    @extend .btn;
+    @extend .btn-primary;
+
+    background-color: $text-color !important;
+    font-size: 16px;
+
+    span {
+      padding: 0;
+    }
+
+    &::before {
+      display: none;
+    }
+  }
+}

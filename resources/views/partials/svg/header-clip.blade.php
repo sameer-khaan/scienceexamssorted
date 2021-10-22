@@ -1,0 +1,2 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 110" preserveAspectRatio="none" class="header-clip"><path d="M0 110V0h55.308a78 78 0 010 110z" fill="#f2efe4"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 381.001 48" preserveAspectRatio="none" class="header-clip-mobile"><path d="M-.001 0h381v25.308C332.153 39.332 264.831 48 190.499 48S48.847 39.332-.001 25.308z" fill="#f2efe4"/></svg>

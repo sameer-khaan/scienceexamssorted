@@ -1,0 +1,90 @@
+/* stylelint-disable no-descending-specificity */
+.team-members {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-left: -10px;
+  margin-right: -10px;
+
+  .team-member {
+    width: 25%;
+    padding: 0 10px;
+    flex: 0 0 auto;
+    text-align: center;
+    margin-bottom: 45px;
+
+    &.blank {
+      margin-bottom: 0;
+    }
+
+    @include media-breakpoint-down(lg) {
+      width: 33.33%;
+    }
+
+    @include media-breakpoint-down(sm) {
+      width: 50%;
+    }
+
+    .image-outer {
+      width: 200px;
+      height: 200px;
+      border-radius: 200px;
+      overflow: hidden;
+      display: inline-block;
+      margin-bottom: 10px;
+      border: 4px solid $secondary;
+
+      @include media-breakpoint-down(sm) {
+        width: 150px;
+        height: 150px;
+      }
+
+      @include media-breakpoint-down(xs) {
+        width: 100px;
+        height: 100px;
+      }
+
+      .image {
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+
+        @include media-breakpoint-down(sm) {
+          width: 150px;
+          height: 150px;
+        }
+
+        @include media-breakpoint-down(xs) {
+          width: 100px;
+          height: 100px;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    }
+
+    .text {
+      .h4 {
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+
+      .job-title {
+        margin-bottom: 10px;
+      }
+
+      .email {
+        i {
+          margin-right: 10px;
+        }
+
+        font-weight: 700;
+      }
+    }
+  }
+}

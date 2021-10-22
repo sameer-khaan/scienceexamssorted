@@ -1,0 +1,18 @@
+body.tax-ses_subject {
+  main.main {
+    padding-bottom: $global-padding;
+
+    @include media-breakpoint-down(sm) {
+      padding-bottom: $global-padding-mobile;
+    }
+  }
+
+  .page-inner-content .full-width:first-child > .container > .search-grid {
+    padding-top: 0 !important;
+    margin-bottom: -80px;
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: -60px;
+    }
+  }
+}

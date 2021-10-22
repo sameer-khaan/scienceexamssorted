@@ -1,0 +1,208 @@
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable no-duplicate-selectors */
+.woocommerce-account,
+.my_account_orders,
+.multiple-shipping-addresses {
+  legend {
+    @extend .h3;
+
+    padding-top: 1.8em;
+  }
+
+  input.button,
+  a.button {
+    margin-right: 3px !important;
+
+    &:hover,
+    &:active,
+    &:focus {
+      transform: initial;
+      background-color: #000 !important;
+    }
+  }
+}
+
+body.woocommerce-account.logged-in {
+  background-color: $primary;
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation {
+  width: 20%;
+
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+  }
+}
+
+.woocommerce-account .woocommerce-MyAccount-content {
+  display: inline-block;
+  float: left;
+  margin-left: 5%;
+  width: 75%;
+
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul {
+  padding: 0;
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul li {
+  list-style: none;
+  padding-bottom: 0;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+
+  &:last-of-type {
+    margin-bottom: 50px;
+  }
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul li a {
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+  padding-left: 55px;
+  position: relative;
+  background-color: $secondary;
+  color: #fff;
+  border-top-left-radius: 20px;
+  transition: all 0.2s ease-in-out;
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul li a::before {
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  width: 22px;
+  text-align: center;
+}
+
+.woocommerce-account .woocommerce-MyAccount-content {
+  background-color: #fff;
+  padding: 50px;
+  border-top-left-radius: 50px;
+  margin-bottom: $global-padding;
+
+  @include media-breakpoint-down(sm) {
+    margin-bottom: $global-padding-mobile;
+  }
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul li.is-active a,
+.woocommerce-account .woocommerce-MyAccount-navigation ul li a:hover {
+  background-color: #fff;
+  color: $text-color;
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--dashboard a::before {
+  font-family: "Font Awesome 5 Pro", serif;
+  content: "\f0e4";
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--orders a::before {
+  font-family: "Font Awesome 5 Pro", serif;
+  content: "\f291";
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--downloads a::before {
+  font-family: "Font Awesome 5 Pro", serif;
+  content: "\f1c6";
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--edit-address a::before {
+  font-family: "Font Awesome 5 Pro", serif;
+  content: "\f015";
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--payment-methods a::before {
+  font-family: "Font Awesome 5 Pro", serif;
+  content: "\f09d";
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--edit-account a::before {
+  font-family: "Font Awesome 5 Pro", serif;
+  content: "\f007";
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--customer-logout a::before {
+  font-family: "Font Awesome 5 Pro", serif;
+  content: "\f08b";
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--bookings a::before {
+  font-family: "Font Awesome 5 Pro", serif;
+  content: "\f02d";
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--vouchers a::before {
+  font-family: "Font Awesome 5 Pro", serif;
+  content: "\f154";
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--members-area a::before {
+  font-family: "Font Awesome 5 Pro", serif;
+  content: "\f762";
+}
+
+.woocommerce-account .woocommerce-MyAccount-content h2 {
+  font-size: 25px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.woocommerce-account p.order-again {
+  text-align: right;
+}
+
+.woocommerce-account .woocommerce-EditAccountForm input[type="submit"] {
+  margin-top: 50px;
+  float: right;
+}
+
+.woocommerce-account .woocommerce-MyAccount-content .woocommerce-Address {
+  @extend .col-12 ;
+  @extend .col-md-6;
+}
+
+.woocommerce-account {
+  .woocommerce-address-fields__field-wrapper {
+    .form-row {
+      width: 100%;
+
+      label {
+        width: 100%;
+      }
+
+      span {
+        width: 100%;
+      }
+    }
+  }
+
+  .addresses {
+    .col-1,
+    .col-2 {
+      max-width: 100%;
+      padding: 0 !important;
+
+      address {
+        border: none;
+        background-color: $light-grey;
+        border-radius: 0;
+        padding: 15px;
+      }
+    }
+  }
+}
+
+.woocommerce form .form-row input.input-text,
+.woocommerce form .form-row textarea,
+.woocommerce form .form-row .password-input {
+  width: 100%;
+}

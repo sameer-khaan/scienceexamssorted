@@ -1,0 +1,348 @@
+html,
+body {
+  font-family: $body-font;
+  font-size: 19px;
+  color: $text-color;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  line-height: 1.3em;
+  background-color: #fff;
+
+  @include media-breakpoint-down(md) {
+    font-size: 16px;
+  }
+
+  *::selection {
+    background: $secondary;
+    color: $cream;
+  }
+}
+
+a {
+  color: $text-color;
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+  font-weight: bold;
+  font-family: $display-font;
+  text-transform: uppercase;
+  margin-bottom: 0.8em;
+  color: $text-color;
+  font-style: normal !important;
+  letter-spacing: 0;
+}
+
+h1,
+.h1 {
+  font-size: 42px;
+
+  @include media-breakpoint-down(lg) {
+    font-size: 35px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    font-size: 30px;
+  }
+}
+
+.no-break {
+  white-space: nowrap;
+}
+
+h2,
+.h2 {
+  font-size: 32px;
+
+  @include media-breakpoint-down(lg) {
+    font-size: 30px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    font-size: 28px;
+  }
+}
+
+h3,
+.h3 {
+  font-size: 20px;
+
+  @include media-breakpoint-down(lg) {
+    font-size: 19px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    font-size: 17px;
+  }
+}
+
+h4,
+.h4 {
+  font-size: 16px;
+  text-transform: none;
+
+  @include media-breakpoint-down(lg) {
+    font-size: 16px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    font-size: 15px;
+  }
+}
+
+h5,
+.h5 {
+  font-size: 16px;
+  text-transform: none;
+
+  @include media-breakpoint-down(sm) {
+    font-size: 15px;
+  }
+}
+
+@for $index from 1 through 6 {
+  h#{$index} {
+    @for $innerindex from $index through 6 {
+      & + h#{$innerindex} {
+        margin-top: -1em;
+      }
+    }
+  }
+}
+
+.pusher {
+  overflow: hidden;
+}
+
+.full-width {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.white-row {
+  color: #fff;
+
+  a:not(.btn) {
+    color: #fff;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: #fff;
+  }
+
+  .btn-primary {
+    @extend .btn-white-hover;
+  }
+}
+
+.dark-bg {
+  background-color: $text-color;
+}
+
+.global-padding {
+  padding: $global-padding 0;
+
+  @include media-breakpoint-down(md) {
+    padding: $global-padding-mobile 0;
+  }
+
+  &.additional-padding-top {
+    padding-top: $global-padding+30px;
+
+    @include media-breakpoint-down(md) {
+      padding-top: $global-padding-mobile+20px;
+    }
+  }
+
+  &.additional-padding-bottom {
+    padding-bottom: $global-padding+30px;
+
+    @include media-breakpoint-down(md) {
+      padding-bottom: $global-padding-mobile+20px;
+    }
+  }
+}
+
+.container-fluid {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.container-fluid,
+.container {
+  @include media-breakpoint-only(xl) {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  @include media-breakpoint-down(md) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+.no-last-margin {
+  *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.wp-block-group.full-width {
+  .wp-block-columns.full-width {
+    @extend .container-fluid;
+  }
+
+  .wp-block-columns:not(.full-width) {
+    @extend .container;
+  }
+}
+
+.row {
+  &.lg-gutter {
+    @include media-breakpoint-up(xl) {
+      margin-left: -40px;
+      margin-right: -40px;
+    }
+
+    [class^="col-"] {
+      @include media-breakpoint-up(xl) {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+    }
+  }
+
+  &.sm-gutter {
+    @include media-breakpoint-up(xl) {
+      margin-left: -15px;
+      margin-right: -15px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+
+    [class^="col-"] {
+      @include media-breakpoint-up(xl) {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      @include media-breakpoint-down(sm) {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }
+  }
+}
+
+hr {
+  @extend .full-width;
+
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+  border: 0 !important;
+  background-color: $light-grey;
+  height: 3px !important;
+}
+
+hr.wp-block-separator {
+  left: 50%;
+  right: auto;
+  margin-right: auto;
+  margin-left: -50vw;
+}
+
+.two-columns {
+  .wp-block-group__inner-container {
+    & > div,
+    & > figure {
+      width: calc(50% - 40px);
+      flex: 0 0 auto;
+
+      @include media-breakpoint-down(sm) {
+        width: 100%;
+      }
+    }
+  }
+
+  .menu-section {
+    break-inside: avoid;
+    margin-bottom: 0 !important;
+  }
+}
+
+.button-select-hold {
+  margin-bottom: 30px;
+}
+
+.tooltip-hold {
+  background-color: $primary;
+  color: #fff;
+  padding: 5px;
+  border-radius: 20px;
+  margin-left: 10px;
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  line-height: 18px;
+}
+
+small.sub-topics {
+  margin: 2.5px -2.5px -2.5px -2.5px;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  strong {
+    width: 100%;
+    flex: 1 0 auto;
+    display: block;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+
+  span {
+    background-color: $secondary;
+    content: #fff;
+    padding: 2.5px 5px;
+    margin: 2.5px;
+    flex: 0 1 auto;
+  }
+}
+
+.cookie-gdpr-message.small-message h2 {
+  font-size: 17px;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+
+.cookie-gdpr-message.small-message .cookie-gdpr-message-hold {
+  font-size: 14px !important;
+  line-height: 16px !important;
+}

@@ -1,0 +1,25 @@
+body.single-ses_free_resources {
+  .page-inner-content > :first-child:not(div) {
+    margin-top: 0;
+  }
+
+  .large-card {
+    margin-top: 50px;
+
+    @include media-breakpoint-down(sm) {
+      .table {
+        thead {
+          display: none;
+        }
+
+        th,
+        td {
+          display: block;
+          box-sizing: border-box;
+          clear: both;
+          width: 100% !important;
+        }
+      }
+    }
+  }
+}

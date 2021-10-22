@@ -1,0 +1,38 @@
+.alert {
+  padding: 50px;
+  border-top-left-radius: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & > * {
+    flex: 0 1 auto;
+  }
+
+  h3 {
+    margin-bottom: 0;
+  }
+
+  @include media-breakpoint-down(lg) {
+    display: block;
+  }
+
+  @include media-breakpoint-down(md) {
+    padding: 30px;
+    border-top-left-radius: 30px;
+  }
+
+  .button-hold {
+    .btn {
+      @include media-breakpoint-up(xl) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  &.alert-info {
+    @extend .white-row;
+
+    background-color: $text-color;
+  }
+}

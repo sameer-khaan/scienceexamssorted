@@ -1,0 +1,174 @@
+/* stylelint-disable no-descending-specificity */
+.search-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: -15px;
+  align-items: stretch;
+  width: auto;
+  min-width: 100%;
+
+  .post-card {
+    width: 33.33%;
+    padding: 15px;
+    flex: 0 0 auto;
+
+    @include media-breakpoint-down(md) {
+      width: 50%;
+    }
+
+    @include media-breakpoint-down(xs) {
+      width: 100%;
+    }
+
+    &.blank {
+      padding: 0;
+      padding-left: 15px;
+      padding-right: 15px;
+      height: 0;
+    }
+  }
+
+  &.columns-4 {
+    @include media-breakpoint-down(lg) {
+      margin: -7.5px;
+    }
+
+    .post-card {
+      width: 25%;
+
+      @include media-breakpoint-only(lg) {
+        .inner-text {
+          padding: 15px !important;
+        }
+      }
+
+      @include media-breakpoint-down(md) {
+        width: 50%;
+
+        .inner-text {
+          padding: 15px !important;
+        }
+      }
+
+      @include media-breakpoint-down(lg) {
+        padding: 7.5px;
+      }
+
+      @include media-breakpoint-down(xs) {
+        width: 100%;
+      }
+    }
+  }
+
+  &.columns-2 {
+    .post-card {
+      width: 50%;
+
+      @include media-breakpoint-down(md) {
+        width: 100%;
+      }
+    }
+  }
+}
+
+nav.posts-navigation {
+  margin-top: $global-padding;
+
+  @include media-breakpoint-down(md) {
+    margin-top: $global-padding-mobile;
+  }
+
+  .nav-previous,
+  .nav-next {
+    display: inline-block;
+    margin-right: 10px;
+
+    a {
+      @extend .btn;
+      @extend .btn-primary;
+    }
+  }
+}
+
+.page-inner-content {
+  .full-width:first-child {
+    & > .container {
+      & > .search-grid {
+        padding-top: $global-padding;
+
+        @include media-breakpoint-down(md) {
+          padding-top: $global-padding-mobile;
+        }
+      }
+    }
+  }
+}
+
+body.single,
+body.archive {
+  .entry-content:not(.wc-tab),
+  .page-inner-content {
+    > *:first-child:not(div),
+    > *:first-child.content-area {
+      margin-top: $global-padding;
+
+      @include media-breakpoint-down(md) {
+        margin-top: $global-padding-mobile;
+      }
+    }
+  }
+}
+
+#rd-widget-root {
+  max-width: none !important;
+}
+
+body.single-mrss_event {
+  .image-hold {
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 20px;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .info-hold {
+    background-color: $primary;
+    padding: 30px;
+
+    .price-text {
+      background-color: $red;
+      padding: 10px 50px 10px 20px;
+      text-align: right;
+      float: right;
+      margin-right: -30px;
+      margin-top: -1em;
+      font-family: $display-font;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+
+      li {
+        margin-bottom: 15px;
+        padding: 0;
+        position: relative;
+        padding-left: 30px;
+
+        i {
+          position: absolute;
+          left: 0;
+          top: 4px;
+        }
+      }
+    }
+  }
+}
