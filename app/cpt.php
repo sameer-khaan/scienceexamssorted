@@ -101,7 +101,7 @@ function exam_paper_cpt() {
     );
 
     $rewrite = array(
-        'slug'                  => 'subject/%ses_subject%/notes-and-exam-questions/level/%ses_level%',
+        'slug'                  => 'subject/%ses_subject%/notes-and-exam-questions/level/%ses_level%/board/%ses_exam_board%',
         'with_front'            => false,
         'pages'                 => true,
         'feeds'                 => true,
@@ -113,7 +113,7 @@ function exam_paper_cpt() {
 Hone your understanding and exam technique with our past exam questions booklets.', 'sage' ),
         'labels'                => $labels,
         'supports'              => array( 'title', 'editor', 'revisions' ),
-        'taxonomies'            => array( 'ses_subject', 'ses_level' ),
+        'taxonomies'            => array( 'ses_subject', 'ses_level', 'ses_exam_board' ),
         'hierarchical'          => false,
         'public'                => true,
         'show_ui'               => true,
@@ -139,8 +139,8 @@ add_action( 'init', __NAMESPACE__.'\\exam_paper_cpt', 0 );
 function activities_archive_rewrite_rules() {
 
     add_rewrite_rule(
-        '^subject/(.*)/activities/level/(.*)/(.*)/?$',
-        'index.php?post_type=ses_activities&ses_subject=$matches[1]&ses_level=$matches[2]&name=$matches[3]&page_levels=content',
+        '^subject/(.*)/activities/level/(.*)/tier/(.*)/(.*)/?$',
+        'index.php?post_type=ses_activities&ses_subject=$matches[1]&ses_level=$matches[2]&ses_tier=$matches[3]&name=$matches[4]&page_levels=content',
         'top'
     );
 
@@ -151,14 +151,26 @@ function activities_archive_rewrite_rules() {
     );
 
     add_rewrite_rule(
-        '^subject/(.*)/notes-and-exam-questions/level/(.*)/(.*)/?$',
-        'index.php?post_type=ses_exam_paper&ses_subject=$matches[1]&ses_level=$matches[2]&name=$matches[3]&page_levels=content',
+        '^subject/(.*)/notes-and-exam-questions/level/(.*)/board/(.*)/(.*)/?$',
+        'index.php?post_type=ses_exam_paper&ses_subject=$matches[1]&ses_level=$matches[2]&ses_exam_board=$matches[3]&name=$matches[4]&page_levels=content',
+        'top'
+    );
+
+    add_rewrite_rule(
+        '^subject/(.*)/activities/level/(.*)/tier/(.*)/?',
+        'index.php?post_type=ses_activities&ses_subject=$matches[1]&ses_level=$matches[2]&ses_tier=$matches[3]&page_levels=board',
         'top'
     );
 
     add_rewrite_rule(
         '^subject/(.*)/six-mark-questions/level/(.*)/board/(.*)/?',
         'index.php?post_type=ses_six_marks&ses_subject=$matches[1]&ses_level=$matches[2]&ses_exam_board=$matches[3]&page_levels=board',
+        'top'
+    );
+
+    add_rewrite_rule(
+        '^subject/(.*)/notes-and-exam-questions/level/(.*)/board/(.*)/?',
+        'index.php?post_type=ses_exam_paper&ses_subject=$matches[1]&ses_level=$matches[2]&ses_exam_board=$matches[3]&page_levels=board',
         'top'
     );
 
@@ -232,7 +244,7 @@ function activities_cpt() {
         'filter_items_list'     => __( 'Filter activities list', 'sage' ),
     );
     $rewrite = array(
-        'slug'                  => 'subject/%ses_subject%/activities/level/%ses_level%',
+        'slug'                  => 'subject/%ses_subject%/activities/level/%ses_level%/tier/%ses_tier%',
         'with_front'            => false,
         'pages'                 => true,
         'feeds'                 => true,
@@ -242,7 +254,7 @@ function activities_cpt() {
         'description'           => __( 'Print and complete 1 worksheet per week to keep your learning going.  Made for students to use or teachers to set as a lesson starter or homework.', 'sage' ),
         'labels'                => $labels,
         'supports'              => array( 'editor', 'revisions' ),
-        'taxonomies'            => array( 'ses_subject', 'ses_level' ),
+        'taxonomies'            => array( 'ses_subject', 'ses_level', 'ses_tier' ),
         'hierarchical'          => false,
         'public'                => true,
         'show_ui'               => true,
@@ -325,7 +337,14 @@ function wpa_show_permalinks( $post_link, $post ){
             $post_link = str_replace( '%ses_subject%' , $terms[0]->slug , $post_link );
         }
 
-        if($post->post_type == 'ses_six_marks') {
+        if($post->post_type == 'ses_activities') {
+            $terms = wp_get_object_terms( $post->ID, 'ses_tier' );
+            if( $terms ){
+                $post_link = str_replace( '%ses_tier%' , $terms[0]->slug , $post_link );
+            }
+        }
+
+        if($post->post_type == 'ses_six_marks' || $post->post_type == 'ses_exam_paper') {
             $terms = wp_get_object_terms( $post->ID, 'ses_exam_board' );
             if( $terms ){
                 $post_link = str_replace( '%ses_exam_board%' , $terms[0]->slug , $post_link );
@@ -383,6 +402,11 @@ function ses_tier_tax() {
         'items_list'                 => __( 'Tiers list', 'sage' ),
         'items_list_navigation'      => __( 'Tiers list navigation', 'sage' ),
     );
+    $rewrite = array(
+        'slug'                       => 'tier',
+        'with_front'                 => false,
+        'hierarchical'               => false,
+    );
     $args = array(
         'labels'                     => $labels,
         'hierarchical'               => true,
@@ -391,7 +415,7 @@ function ses_tier_tax() {
         'show_admin_column'          => true,
         'show_in_nav_menus'          => false,
         'show_tagcloud'              => false,
-        'rewrite'                    => false,
+        'rewrite'                    => $rewrite,
         'show_in_rest'               => true,
     );
     register_taxonomy( 'ses_tier', array( 'ses_activities' ), $args );
@@ -472,6 +496,11 @@ function ses_exam_board_tax() {
         'items_list'                 => __( 'Exam Boards list', 'sage' ),
         'items_list_navigation'      => __( 'Exam Boards list navigation', 'sage' ),
     );
+    $rewrite = array(
+        'slug'                       => 'board',
+        'with_front'                 => false,
+        'hierarchical'               => false,
+    );
     $args = array(
         'labels'                     => $labels,
         'hierarchical'               => false,
@@ -481,10 +510,10 @@ function ses_exam_board_tax() {
         'show_admin_column'          => true,
         'show_in_nav_menus'          => false,
         'show_tagcloud'              => false,
-        'rewrite'                    => false,
+        'rewrite'                    => $rewrite,
         'show_in_rest'               => true,
     );
-    register_taxonomy( 'ses_exam_board', array(), $args );
+    register_taxonomy( 'ses_exam_board', array( 'ses_exam_paper', 'ses_six_marks' ), $args );
 
 }
 add_action( 'init', __NAMESPACE__.'\\ses_exam_board_tax', 0 );

@@ -1,50 +1,106 @@
-@if(get_query_var('post_type') == "ses_activities" || get_query_var('post_type') == "ses_exam_paper")
+@php
+global $wp;
+$url = home_url($wp->request);
 
-  @while (have_posts()) @php the_post() @endphp
-    @include('partials.cards.level-card')
-    @php $GLOBALS["terms_count"] ++; @endphp
-  @endwhile
+$str = strtolower($url);
+$substr = strtolower('/');
+$ct = 0;
+$pos = 0;
+while (($pos = strpos($str, $substr, $pos)) !== false) {
+    if (++$ct == 9) {
+        $pos;
+        break;
+    }
+    $pos++;
+}
 
-@elseif(get_query_var('post_type') == "ses_six_marks")
-  @php 
-    global $wp;
-    $base_url =  home_url( $wp->request );
+if(get_query_var('post_type') == 'ses_activities') {
 
-    $terms = get_terms(array(
-      'taxonomy' => 'ses_exam_board',
-      'orderby' => 'menu_order'
-    ));
-  @endphp
-  @if($terms)
-    @foreach($terms as $term)
-      @php
-        $post_type = "ses_six_marks";
-        $posts = get_posts(array(
-          'tax_query' => array(
-            array(
-              'taxonomy' => 'ses_level',
-              'field'    => 'slug',
-              'terms'    => array( get_query_var('ses_level') )
-            ),
-            array(
-              'taxonomy' => 'ses_exam_board',
-              'field'    => 'slug',
-              'terms'    => array( $term->slug )
-            ),
-            array(
-              'taxonomy' => 'ses_subject',
-              'field'    => 'slug',
-              'terms'    => array( get_query_var('ses_subject') )
-            )
-          ),
-          'post_type' => $post_type
-        ));
-      @endphp
-      @if(count($posts))
-        @php $link = $base_url . '/board/' . $term->slug @endphp
-        @include('partials.cards.board-card')
-        @php $GLOBALS["terms_count"] ++; @endphp
-      @endif
+    $terms = get_terms([
+        'taxonomy' => 'ses_tier',
+        'orderby' => 'menu_order',
+    ]);
+
+} else if(get_query_var('post_type') == "ses_six_marks" || get_query_var('post_type') == "ses_exam_paper") {
+
+    $terms = get_terms([
+        'taxonomy' => 'ses_exam_board',
+        'orderby' => 'menu_order',
+    ]);
+}
+@endphp
+
+@if ($terms)
+    @foreach ($terms as $term)
+        @php
+            $post_type = get_query_var('post_type');
+            if(get_query_var('post_type') == 'ses_activities'){
+                $posts = get_posts([
+                    'tax_query' => [
+                        [
+                            'taxonomy' => 'ses_level',
+                            'field' => 'slug',
+                            'terms' => [get_query_var('ses_level')],
+                        ],
+                        [
+                            'taxonomy' => 'ses_tier',
+                            'field' => 'slug',
+                            'terms' => [$term->slug],
+                        ],
+                        [
+                            'taxonomy' => 'ses_subject',
+                            'field' => 'slug',
+                            'terms' => [get_query_var('ses_subject')],
+                        ],
+                    ],
+                    'post_type' => $post_type,
+                    'orderby' => 'menu_order',
+                ]);
+            }
+            else if (get_query_var('post_type') == "ses_six_marks" || get_query_var('post_type') == "ses_exam_paper") {
+                $posts = get_posts([
+                    'tax_query' => [
+                        [
+                            'taxonomy' => 'ses_level',
+                            'field' => 'slug',
+                            'terms' => [get_query_var('ses_level')],
+                        ],
+                        [
+                            'taxonomy' => 'ses_exam_board',
+                            'field' => 'slug',
+                            'terms' => [$term->slug],
+                        ],
+                        [
+                            'taxonomy' => 'ses_subject',
+                            'field' => 'slug',
+                            'terms' => [get_query_var('ses_subject')],
+                        ],
+                    ],
+                    'post_type' => $post_type,
+                    'orderby' => 'menu_order',
+                ]);
+            }
+        @endphp
+
+        @if (count($posts))
+            @php
+              if(get_query_var('page_levels')=="board"){
+                $link = substr($url,0,$pos) .'/'.$term->slug;
+              } else {
+                if(get_query_var('post_type') == 'ses_activities'){
+                  $link = $url . '/tier/' . $term->slug;
+                } else {
+                  $link = $url . '/board/' . $term->slug;
+                }
+              }
+            @endphp
+            @if (strpos($url, $term->slug) == true)
+                @php $activeClass = "active";  @endphp
+            @else
+                @php $activeClass = ""; @endphp
+            @endif
+            @include('partials.cards.board-card')
+            @php $GLOBALS["terms_count"] ++; @endphp
+        @endif
     @endforeach
-  @endif
 @endif

@@ -1,79 +1,98 @@
-@if(get_query_var('post_type') == "ses_activities" || get_query_var('post_type') == "ses_exam_paper")
+@php
+global $wp;
+$url = home_url($wp->request);
 
-    @while (have_posts()) @php the_post() @endphp
+$str = strtolower($url);
+$substr = strtolower('/');
+$ct = 0;
+$pos = 0;
+while (($pos = strpos($str, $substr, $pos)) !== false) {
+    if (++$ct == 9) {
+        $pos;
+        break;
+    }
+    $pos++;
+}
 
-		@include('partials.cards.level-card')
-		@php $GLOBALS["terms_count"] ++; @endphp
+if(get_query_var('post_type') == 'ses_activities') {
 
-   @endwhile
+    $terms = get_terms([
+        'taxonomy' => 'ses_tier',
+        'orderby' => 'menu_order',
+    ]);
 
-@elseif(get_query_var('post_type') == "ses_six_marks")
+} else if(get_query_var('post_type') == "ses_six_marks" || get_query_var('post_type') == "ses_exam_paper") {
 
-  @php 
-    global $wp;
-    $url =  home_url( $wp->request );
+    $terms = get_terms([
+        'taxonomy' => 'ses_exam_board',
+        'orderby' => 'menu_order',
+    ]);
+}
+@endphp
 
-	$str = strtolower($url);
-    $substr = strtolower('/');
-    $ct = 0;
-    $pos = 0;
-    while (($pos = strpos($str, $substr, $pos)) !== false) {
-        if (++$ct == 9) {
-            $pos;
-			break;
-        }
-        $pos++;
-	}
+@if ($terms)
+    @foreach ($terms as $term)
+        @php
+            $post_type = get_query_var('post_type');
+            if(get_query_var('post_type') == 'ses_activities'){
+                $posts = get_posts([
+                    'tax_query' => [
+                        [
+                            'taxonomy' => 'ses_level',
+                            'field' => 'slug',
+                            'terms' => [get_query_var('ses_level')],
+                        ],
+                        [
+                            'taxonomy' => 'ses_tier',
+                            'field' => 'slug',
+                            'terms' => [$term->slug],
+                        ],
+                        [
+                            'taxonomy' => 'ses_subject',
+                            'field' => 'slug',
+                            'terms' => [get_query_var('ses_subject')],
+                        ],
+                    ],
+                    'post_type' => $post_type,
+                    'orderby' => 'menu_order',
+                ]);
+            }
+            else if (get_query_var('post_type') == "ses_six_marks" || get_query_var('post_type') == "ses_exam_paper") {
+                $posts = get_posts([
+                    'tax_query' => [
+                        [
+                            'taxonomy' => 'ses_level',
+                            'field' => 'slug',
+                            'terms' => [get_query_var('ses_level')],
+                        ],
+                        [
+                            'taxonomy' => 'ses_exam_board',
+                            'field' => 'slug',
+                            'terms' => [$term->slug],
+                        ],
+                        [
+                            'taxonomy' => 'ses_subject',
+                            'field' => 'slug',
+                            'terms' => [get_query_var('ses_subject')],
+                        ],
+                    ],
+                    'post_type' => $post_type,
+                    'orderby' => 'menu_order',
+                ]);
+            }
+        @endphp
 
-    $terms = get_terms(array(
-      'taxonomy' => 'ses_exam_board',
-      'orderby' => 'menu_order'
-    ));
-  @endphp
-  @if($terms)
-    @foreach($terms as $term)
-      @php
-        $post_type = "ses_six_marks";
-        $posts = get_posts(array(
-          'tax_query' => array(
-            array(
-              'taxonomy' => 'ses_level',
-              'field'    => 'slug',
-              'terms'    => array( get_query_var('ses_level') )
-            ),
-            array(
-              'taxonomy' => 'ses_exam_board',
-              'field'    => 'slug',
-              'terms'    => array( $term->slug )
-            ),
-            array(
-              'taxonomy' => 'ses_subject',
-              'field'    => 'slug',
-              'terms'    => array( get_query_var('ses_subject') )
-            )
-          ),
-          'post_type' => $post_type
-        ));
-      @endphp
-      @if(count($posts))
-		@if($flag == false)
-        	@php $link = substr($url,0,$pos) .'/aqa';  $flag = true; @endphp
-			@if(strpos($url , "aqa")==true) 
-			  @php $activeClass = "active";  @endphp
-				 @else
-			  @php $activeClass = ""; @endphp
-		   @endif 
-		@else
- 		@php $link = substr($url,0,$pos) .'/edexcel'  @endphp
-			@if(strpos($url , "edexcel")==true) 
-			  @php $activeClass = "active";  @endphp
-				 @else
-			  @php $activeClass = ""; @endphp
-		   @endif 
-		 @endif
-        @include('partials.cards.board-card')
-        @php $GLOBALS["terms_count"] ++; @endphp
-      @endif
+        @if (count($posts))
+            @php
+                $link = substr($url,0,$pos) .'/'.$term->slug;
+            @endphp
+            @if (strpos($url, $term->slug) == true)
+                @php $activeClass = "active";  @endphp
+            @else
+                @php $activeClass = ""; @endphp
+            @endif
+            @include('partials.cards.board-card')
+            @php $GLOBALS["terms_count"] ++; @endphp
+        @endif
     @endforeach
-  @endif
 @endif
